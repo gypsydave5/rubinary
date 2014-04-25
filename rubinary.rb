@@ -75,8 +75,7 @@ def input_validation(input)
   case input
   when Array
     puts "It's an Array"
-    valid_array(input)
-    array_to_binary_array(input)
+    puts array_to_binary_array(input)
   when String
     puts "A string"
     string_to_binary_array(input)
@@ -92,14 +91,26 @@ def valid_array(input_array)
   test = input_array.detect do |digit|
     (digit != 1) and (digit != 0) and (digit != "1") and (digit != "0") and (digit != true) and (digit != false)
   end
-  if test.nil? ?+
+  !test
+end
+
+def array_to_binary_array(input)
+  raise "Invalid input (your array has non binary characters in it" unless valid_array(input)
+  input.map! do |digit|
+    (digit === 1) || (digit === "1") || (digit === true) ? digit = 1 : digit = 0
+  end
+end
+
+def valid_string(input_string)
+  
 end
 
 # def make_bit_array_from_integer
 
 puts n_bit_adder(27,4).join.to_i(2)
 
-input_validation([])
+input_validation([false, 1])
 
-puts  array_to_binary_array([1, 1])
+# puts array_to_binary_array([false, false])
 # puts n_bit_adder(2,3)
+puts valid_string("100110")
